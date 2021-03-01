@@ -12,8 +12,6 @@ text = soup.get_text()
 text_list = text.split('[')
 # clean useless value and get solar power.
 solar_p = [i for i in text_list[1:] if ('太陽能' in i) & ('小計' not in i) & ('太陽能購電' not in i)]
-solar = []
-solar_index = []
 solar_temp = [i.rstrip(', "],').split(',') for i in solar_p]
 solar_dict = {i[1].strip(' " ').rstrip(' " '): [float(i[3].strip(' " ').rstrip(' " '))] for i in solar_temp}
 # get time

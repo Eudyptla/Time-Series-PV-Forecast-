@@ -2,48 +2,30 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 # data from https://www.taipower.com.tw/d006/loadGraph/loadGraph/genshx_.html
-# analysis html get url
+# analysis html construct get url
 url = "https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/genary.txt"
 page = requests.get(url)
-page.encoding='utf-8'
-soup = BeautifulSoup(page.text,'lxml')
+page.encoding = 'utf-8'
+soup = BeautifulSoup(page.text, 'lxml')
 # get text
 text = soup.get_text()
 text_list = text.split('[')
-L = len(text_list)
-
-wind_p=[]
-for i in range(1,L):
-    if '風力' in text_list[i]:
-        if '小計' not in text_list[i]:
-            wind_p =wind_p + [i]
-
-
-wind =[]
-wind_index=[]
-for i in wind_p:
-    s = text_list[i]
-    s = s.rstrip(', "],')
-    s = s.split(',')
-    for j in range(0,len(s)):
-        s[j] = s[j].strip(' " ')
-        s[j] = s[j].rstrip(' " ')
-
-    wind = wind + [[s[3]]]
-    wind_index = wind_index + [s[1]]
-
-time =text_list[0]
-str = ''
-time = str.join(list(filter(lambda ch: ch in '0123456789-: ', time)))
-time = time.strip(':')
-time = [time.rstrip(':')]
-#time = [time.rstrip(':')]
-my_df =pd.read_csv('data\\wind.csv',encoding='utf-8',index_col=0)
-wind = pd.DataFrame(wind,index=wind_index)
-time  = pd.DataFrame(time,index=['時間'])
-wind = time.append(wind)
-wind = wind.T
-my_df = my_df.append(wind,ignore_index = True)
-my_df.to_csv('data\\wind.csv',encoding='utf-8-sig')
+# clean useless data and get wind power
+wind_temp = [i for i in text_list if ('風力' in i) & ('小計' not in i)]
+wind_temp = [i.rstrip(', "],').split(',') for i in wind_temp ]
+wind = { i[1].strip(' " ').rstrip(' " '): [float(i[3].strip(' " ').rstrip(' " '))]  for i in wind_temp}
+# get time
+time = text_list[0]
+time_str = ''
+time = time_str.join(list(filter(lambda ch: ch in '0123456789-: ', time)))
+time = time.strip(':').rstrip(':')
+# save data
+my_df =pd.read_csv('data\\wind.csv', encoding='utf-8', index_col=0)
+wind = pd.DataFrame(wind)
+wind['時間'] = time
+my_df.append(wind, ignore_index=True)
+first_col = my_df.pop('時間')  # set time as first col
+my_df.insert(0, '時間', first_col)
+my_df.to_csv('data\\wind.csv', encoding='utf-8-sig')
 
 
