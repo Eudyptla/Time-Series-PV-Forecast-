@@ -26,7 +26,7 @@ def append_new_data(ori_data, url, append_date):
 url = "http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=467770&stname=%25E6%25A2%25A7%25E6%25A3%25B2&datepicker="
 start_date = '2016-01-01'
 final_date = '2017-12-31'
-Location='WUQI '
+Location = 'WUQI '
 my_df = pd.DataFrame()
 time_delta = pd.date_range(start=start_date, end=final_date, freq='D')
 for date_i in time_delta:

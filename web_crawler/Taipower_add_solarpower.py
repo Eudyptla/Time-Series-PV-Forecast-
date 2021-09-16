@@ -23,9 +23,10 @@ time = time.strip(':').rstrip(':')
 my_df = pd.read_csv('data\\solar.csv', encoding='utf-8', index_col=0)
 solar = pd.DataFrame(solar_dict)
 solar['時間'] = time
-my_df.append(solar, ignore_index=True)
-first_col = my_df.pop('時間')  # set time as first col
-my_df.insert(0, '時間', first_col)
-my_df.to_csv('data\\solar.csv', encoding='utf-8-sig')
+print(solar)
+my_df = my_df.append(solar, ignore_index=True)
+# first_col = my_df.pop('時間')  # set time as first col
+# my_df.insert(0, '時間', first_col)
+# my_df.to_csv('data\\solar.csv', encoding='utf-8-sig')
 
 

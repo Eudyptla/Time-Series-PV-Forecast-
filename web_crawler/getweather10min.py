@@ -1,37 +1,35 @@
+# importing modules
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-import numpy as np
 import pandas as pd
-my_df =pd.read_csv('E:\\Users\\Documents\\10minweather\\HENGCHUN10min.csv',encoding='utf-8',index_col=0)
+from datetime import datetime
 
-url = "https://www.cwb.gov.tw/V7/observe/24real/Data/46759.htm"
+# Collect data
+# Analysis CSS
+url = "https://www.cwb.gov.tw/V8/E/W/Observe/MOD/24hr/46759.html?T=698"
 html = urlopen(url).read()
 soup = BeautifulSoup(html, "lxml")
-data_tag = soup.find(class_='BoxTable')
-text_list = data_tag.get_text('<tr>')
-text =text_list.split('<tr>')
-def kill_n(n):
-    return n != '\n'
+# check time
+time_log = soup.find_all('th')
+data_time = [i.get_text() for i in time_log]
+# Add year
+now_year = str(datetime.now().year) + '/'
+data_time_year = [now_year + i for i in data_time]
+data = pd.DataFrame({'time': data_time_year})
+# other data
+soup_td = soup.find_all('td')
+headers_set = set([i['headers'][0] for i in soup_td])
+headers_list = list(headers_set)
+headers_list.sort()
+# add data
+for i in headers_list[:-1]:
+    data_value = soup.find_all('td', headers=i)
+    data[i] = [j.get_text() for j in data_value]
 
-text_2 = filter(kill_n,text)
-text = list(text_2)
-text[3]='溫度.1'
-text.remove('(°C>>°F)')
-text.remove('(°F>>°C)')
-text.remove('(m/s) | (級)')
-text.remove('(m/s) | (級)')
-text.remove('(公里)')
-text.remove('(%)')
-text.remove('(百帕)')
-text.remove('雨量(毫米)')
-text.remove('(小時)')
-text=np.array(text)
-text=text.reshape((-1,12))
-text=pd.DataFrame(text[1:,1:],index = text[1:,0],columns=text[0,1:])
-text=text.sort_index()
-next_tag=my_df.index[-1]
-j = text.index.get_loc(next_tag)
-new_text = text.iloc[j+1:,:]
-my_df = my_df.append(new_text)
+# weather data different
+weather_data = soup.find_all('td', headers='weather')
+data['weather'] = [i.img['alt'] for i in weather_data]
+# save data
+data.to_csv('data\\CWB_Heng_Chun .csv', encoding='utf-8-sig')
 
-my_df.to_csv('E:\\Users\\Documents\\10minweather\\HENGCHUN10min.csv',encoding='utf-8-sig')
+
