@@ -6,7 +6,7 @@ Demo my ML project.
 
 [SARIMA PV forecast](https://github.com/Eudyptla/Interview/blob/main/TaiChung_DE_Forecast_SARIMA.ipynb)
 
-[Neural Work PV forecast](https://github.com/Eudyptla/Interview/blob/main/Taichung_DE_Forecast_Neural_network.ipynb)
+[Neural Network PV forecast](https://github.com/Eudyptla/Interview/blob/main/Taichung_DE_Forecast_Neural_network.ipynb)
 
 [Manipulating data](https://github.com/Eudyptla/Interview/blob/main/Manipulating_TaiChung_DE_Power_Data.ipynb)
 
