@@ -1,15 +1,9 @@
-# Interview
+# Tai Chung DE Plant PV Forecast  
 
-Demo my ML project.
+Data source: TaiChung DE Plant, CWB WUQI weather data.
 
-[SVR PV forecast. ](https://github.com/Eudyptla/Interview/blob/main/TaiChung_DE_Forecast_SVR.ipynb) 
+Time period: 2016/01/01 - 2017/12/31
 
-[SARIMA PV forecast](https://github.com/Eudyptla/Interview/blob/main/TaiChung_DE_Forecast_SARIMA.ipynb)
+Time frequency : 1 hour.
 
-[Neural Network PV forecast](https://github.com/Eudyptla/Interview/blob/main/Taichung_DE_Forecast_Neural_network.ipynb)
-
-[LSTM PV forecast](https://github.com/Eudyptla/Interview/blob/main/Taichung_DE_PV_Forecast_LSTM.ipynb)
-
-[Manipulating data](https://github.com/Eudyptla/Interview/blob/main/Manipulating_TaiChung_DE_Power_Data.ipynb)
-
-[Web crawler](https://github.com/Eudyptla/Interview/blob/main/Web_crawler_TCB_HengChung.ipynb)
+Try SARIMA, SVR, Neural Network and LSTM to regression.
