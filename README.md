@@ -2,8 +2,10 @@
 
 Data source: Taichung DE Plant, CWB WUQI weather data.
 
-Time period: 2016/01/01 - 2017/12/31
+Period: 2016/01/01 - 2017/12/31
 
-Time frequency : 1 hour.
+Frequency : 1 hour.
+
+Data manipulating : power→weather.
 
 Try SARIMA, SVR, Xgboost, Neural Network and LSTM to regression.
