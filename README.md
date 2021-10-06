@@ -1,12 +1,14 @@
-# Taichung DE Plant PV Forecast  
+# Introduction
+In the future, solar energy will be the main power supply. Solar energy is non-dispatchable source. Ensuring grid stability , PV forecast is the problem. I will try to solve problem with machine learning.      
 
-Data source: Taichung DE Plant, CWB WUQI weather data.
+Question : predicet next hour energy .
+
+# Data Info
+Data source: Taichung DE PV Plant, CWB WUQI weather data.
 
 Period: 2016/01/01 - 2017/12/31
 
 Frequency : 1 hour.
-
-# Data Info
 
 Power data :
              
@@ -47,7 +49,22 @@ Weather data :
                 UVI : This station can't collect UVI.
 
                 Cloud Amount : refers to the fraction of the sky obscured by clouds.
+ 
+ [power data processing](https://github.com/Eudyptla/Time-Series-PV-Forecast-/blob/main/Manipulating_Taichung_DE_Power_and_Solar_Irradiance.ipynb)
+ 
+ [weather data processing](https://github.com/Eudyptla/Time-Series-PV-Forecast-/blob/main/Manipulating_WUQI_Weather_and_Merge_Power_Data.ipynb)
+               
+# Experiment with 5 different models:
 
+[SARIMA](https://github.com/Eudyptla/Time-Series-PV-Forecast-/blob/main/TaiChung_DE_Forecast_SARIMA.ipynb)
+
+[SVR](https://github.com/Eudyptla/Time-Series-PV-Forecast-/blob/main/TaiChung_DE_Forecast_SVR.ipynb)
+
+[Xgboost](https://github.com/Eudyptla/Time-Series-PV-Forecast-/blob/main/Taichung_DE_PV_Forecast_Xgboost.ipynb)
+
+[Neural Network](https://github.com/Eudyptla/Time-Series-PV-Forecast-/blob/main/Taichung_DE_Forecast_Neural_network.ipynb)
+
+[LSTM](https://github.com/Eudyptla/Time-Series-PV-Forecast-/blob/main/Taichung_DE_PV_Forecast_LSTM.ipynb) 
 
 # Model Score 
 
